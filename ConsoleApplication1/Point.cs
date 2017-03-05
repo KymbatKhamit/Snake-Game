@@ -9,15 +9,18 @@ namespace Game
 {
     public class Point
     {
-        public int x, y;
+        public int x;
+        public int y;
+
         public Point()
         {
 
         }
-        public Point(int _x, int _y)
+        public Point(int x, int y)
         {
-            x = _x;
-            y = _y;
+            this.x = x;
+            this.y = y;
+
         }
         public override int GetHashCode()
         {
@@ -25,8 +28,8 @@ namespace Game
         }
         public override bool Equals(object obj)
         {
-            Point tmp = obj as Point;
-            if (tmp.x == x && tmp.y == y)
+            Point o = obj as Point;
+            if (this.x == o.x && this.y == o.y)
             {
                 return true;
             }
@@ -34,3 +37,4 @@ namespace Game
         }
     }
 }
+

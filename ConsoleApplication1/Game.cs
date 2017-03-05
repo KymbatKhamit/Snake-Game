@@ -31,5 +31,35 @@ namespace Game
                 Console.Write(' ');
             }
         }
-    }
-}
+        public void AddNewPoint(Point P)
+        {
+            points.Add(P);
+        }
+        public bool Intersect(GameObject obj)
+        {
+            for (int i = 0; i < points.Count; i++)
+            {
+                for (int j = 0; j < obj.points.Count; j++)
+                {
+                    if (points[i].Equals(obj.points[j]))
+                    {
+                        return true;
+                    }
+                }
+            }
+                    return false; 
+                }
+                public bool Intersect(Point P)
+        {
+            for (int i = 0; i < points.Count; i++)
+            {
+                if (points[i].Equals(P)) { 
+                    return true;
+                }
+            }
+                return false;
+            }
+        }
+   }
+        
+   

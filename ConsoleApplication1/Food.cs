@@ -16,5 +16,10 @@ namespace Game
             color = ConsoleColor.Green;
             sign = '$';
         }
+        public void SetNewPosition(Point P)
+        {
+            points.Clear();
+            points.Add(P);
+        }
     }
 }
