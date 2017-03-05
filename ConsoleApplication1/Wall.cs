@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+    [Serializable]
     class Wall:GameObject
     {
         public Wall()

@@ -66,6 +66,17 @@ namespace Game
                         snake.direction_x = +1;
                         snake.direction_y = 0;
                         break;
+                    case ConsoleKey.F1:
+                        Save();
+                        break;
+                    case ConsoleKey.F2:
+                        drawer.Abort();
+                        Load();
+                        drawer = new Thread(Draw);
+                        drawer.Start();
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -86,6 +97,38 @@ namespace Game
         {
             game_over = true;
             Console.Clear();
+        }
+
+        static void SaveIt(string filename, object obj)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream fs = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            bf.Serialize(fs, obj);
+            fs.Close();
+        }
+
+        static public object LoadIt(string filename)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+            object tmp_object = bf.Deserialize(fs) as object;
+            fs.Close();
+            return tmp_object;
+        }
+
+        static void Load()
+        {
+            wall = LoadIt("1.wall") as Wall;
+            food = LoadIt("1.food") as Food;
+            snake = LoadIt("1.snake") as Snake;
+         
+        }
+
+        static void Save()
+        {
+            SaveIt("1.wall", wall);
+            SaveIt("1.food", food);
+            SaveIt("1.snake", snake);
         }
         static void Draw()
         {

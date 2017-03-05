@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+    [Serializable]
     class Snake:GameObject
     {
         public int direction_x;

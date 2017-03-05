@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
+    [Serializable]
     public class Point
     {
         public int x;
