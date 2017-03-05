@@ -20,6 +20,7 @@ namespace Game
         {
             for(int i = 0; i < points.Count; i++)
             {
+                Console.ForegroundColor = color;
                 Console.SetCursorPosition(points[i].x, points[i].y);
                 Console.Write(sign);
             }

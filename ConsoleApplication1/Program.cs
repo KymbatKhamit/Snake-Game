@@ -16,6 +16,7 @@ namespace Game
         static Snake snake;
         static Thread drawer;
         static Random rnd;
+        static int score;
         public static int game_height;
         public static int game_width;
         static bool game_over;
@@ -30,6 +31,7 @@ namespace Game
             wall = new Wall();
             food = new Food();
             rnd = new Random();
+            score = 0;
             snake = new Snake();
             snake.AddNewPoint(GetEmptyPosition());
             for (int i = 0; i < 10; i++)
@@ -121,18 +123,29 @@ namespace Game
             wall = LoadIt("1.wall") as Wall;
             food = LoadIt("1.food") as Food;
             snake = LoadIt("1.snake") as Snake;
-         
+            Point tmp_point = LoadIt("1.score") as Point;
+            score = tmp_point.x;
         }
 
         static void Save()
         {
+            Point tmp_point = new Point(score, 0);
+            SaveIt("1.score", tmp_point);
             SaveIt("1.wall", wall);
             SaveIt("1.food", food);
             SaveIt("1.snake", snake);
         }
+
+        static void ShowScore()
+        {
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.SetCursorPosition(0, game_height);
+            Console.Write("Score: {0}", score);
+        }
         static void Draw()
         {
             Console.Clear();
+
             wall.Draw();
             food.Draw();
             snake.Draw();
@@ -149,6 +162,7 @@ namespace Game
                     food.Draw();
 
                     snake.Upgrade();
+                    score++;
                 }
                 if (snake.Intersect(wall))
                 {
@@ -156,6 +170,7 @@ namespace Game
                     break;
                 }
                 snake.Draw();
+                ShowScore();
                 Thread.Sleep(250);
             }
         }
